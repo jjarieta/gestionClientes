@@ -47,11 +47,49 @@ public class ControllerUsuarios implements ActionListener {
         //BOTO GUARDAR -  JJAN
        if(e.getSource() == ObjFrmUsuarios.btnGuardar){
             ObjUsuarios.setStrTipoNip((String) ObjFrmUsuarios.CbxTipoNip.getSelectedItem());
-            ObjUsuarios.setDoubNip(Double.parseDouble(ObjFrmUsuarios.txtNip.getText()));
-            ObjUsuarios.setStrNombres(ObjFrmUsuarios.txtNombres.getText());
-            ObjUsuarios.setStrApellidos(ObjFrmUsuarios.txtApellidos .getText());
-            ObjUsuarios.setStrDireccion(ObjFrmUsuarios.txtDireccion.getText());
-            ObjUsuarios.setStrTelefono(ObjFrmUsuarios.txtTelefono.getText());
+            
+            //Validacion de campos al guardar un cliente            
+            if (!ObjFrmUsuarios.txtNip.getText().isEmpty()){
+                ObjUsuarios.setDoubNip(Double.parseDouble(ObjFrmUsuarios.txtNip.getText()));
+            }else{
+                JOptionPane.showMessageDialog(null, "El campo NIP es obligatorio");
+                ObjFrmUsuarios.txtNip.requestFocus();
+                return;
+            }
+            
+            if (!ObjFrmUsuarios.txtNombres.getText().isEmpty()){
+               ObjUsuarios.setStrNombres(ObjFrmUsuarios.txtNombres.getText());
+            }else{
+                JOptionPane.showMessageDialog(null, "El campo NOMBRES es obligatorio");
+                ObjFrmUsuarios.txtNombres.requestFocus();
+                return;
+            }
+            
+            if (!ObjFrmUsuarios.txtApellidos.getText().isEmpty()){
+              ObjUsuarios.setStrApellidos(ObjFrmUsuarios.txtApellidos .getText());
+            }else{
+                JOptionPane.showMessageDialog(null, "El campo APELLIDOS es obligatorio");
+                ObjFrmUsuarios.txtApellidos.requestFocus();
+                return;
+            }
+            
+             if (!ObjFrmUsuarios.txtDireccion.getText().isEmpty()){
+              ObjUsuarios.setStrDireccion(ObjFrmUsuarios.txtDireccion.getText());
+            }else{
+                JOptionPane.showMessageDialog(null, "El campo DIRECCIÓN es obligatorio");
+                ObjFrmUsuarios.txtDireccion.requestFocus();
+                return;
+            }
+            
+             if (!ObjFrmUsuarios.txtTelefono.getText().isEmpty()){
+              ObjUsuarios.setStrTelefono(ObjFrmUsuarios.txtTelefono.getText());
+            }else{
+                JOptionPane.showMessageDialog(null, "El campo TELÉFONO es obligatorio");
+                ObjFrmUsuarios.txtTelefono.requestFocus();
+                return;
+            }
+            
+           
             ObjUsuarios.setStrGenero((String) ObjFrmUsuarios.cbxGenero.getSelectedItem());
             
             if(ObjUsariosDAO.AgregarUsuario(ObjUsuarios)){
